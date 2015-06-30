@@ -6,7 +6,7 @@
 #    By: aratinau <aratinau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/29 14:40:28 by aratinau          #+#    #+#              #
-#    Updated: 2015/06/29 18:17:58 by aratinau         ###   ########.fr        #
+#    Updated: 2015/06/29 16:51:18 by aratinau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,27 +18,19 @@ SRC = doubly_linked_list_add.c \
 	  doubly_linked_list_display.c \
 	  main.c
 
-#OBJ = $(SRC:.c=.o)
-OBJDIR := ./objdir/
 OBJ = $(SRC:.c=.o)
-P_OBJ = $(addprefix $(OBJDIR), $(OBJ))
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
-$(NAME):$(P_OBJ)
+$(NAME):$(OBJ)
 	make -C ../libraire/ ##
-	$(CC) $(CFLAGS) $(OBJDIR) $^ -o $(NAME) \
+	$(CC) $(CFLAGS) $^ -o $(NAME) \
 	../libraire/libft.a ##
 
-#$(OBJDIR):
-#	mkdir $(OBJDIR)
+all: $(NAME)
 
-all: $(P_OBJ)
-
-#$(P_OBJ): | $(OBJDIR)
-
-$(OBJDIR)%.o : %.c
-	$(CC) -c $(SRC) $(CFLAGS) -o $(OBJDIR)
+%.o:%.c
+	$(CC) -c $(SRC) $(CFLAGS)
 
 clean:
 	rm -rf $(OBJ)
